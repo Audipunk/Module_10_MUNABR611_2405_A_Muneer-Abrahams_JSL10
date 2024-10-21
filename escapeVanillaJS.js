@@ -29,11 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     
 function findMostRecentBook(books) {
-    return books.reduce((mostRecent, book) =>
-         new Date(book.published) < new Date(mostRecent.published)
-     ? book 
-     : mostRecent
-    );
+    return books.reduce((mostRecent, book) => new Date(book.published) < new Date(mostRecent.published)? book : mostRecent
+    )
 }
 function findIntersection(setA, setB) { 
     const intersection = new Set([...setA].filter((item) => setB.has(item)));
