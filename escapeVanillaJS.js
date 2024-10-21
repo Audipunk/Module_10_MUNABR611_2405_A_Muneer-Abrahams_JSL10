@@ -4,33 +4,29 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(books => {
                 const mostRecentBook = findMostRecentBook(books);
-                document.getElementById(
-                    "resultRoom1"
-                ).textContent = `The key to the next room is: ${mostRecentBook.title}`;
+                document.getElementById("resultRoom1").textContent = `The key to the next room is: ${mostRecentBook.title}`;
             });
+        });
     });
 
     document.getElementById("solveRoom2").addEventListener("click", () => {
         const jsConcepts = new Set(["closure", "scope", "hoisting"]);
         const reactConcepts = new Set(["components", "jsx", "hooks", "async"]);
-        const commonConcepts = findIntersection(jsConcepts, jsConcepts);
-        document.getElementById(
-            "room2Result"
-        ).textContent = `The code to unlock the door is: ${Array.from(
-            commonConcepts
-        ).join(', ')}`;
+        const commonConcepts = findIntersection(jsConcepts, reactConcepts);
+        document.getElementById("room2Result").textContent = `The code to unlock the door is: ${Array.from(
+            commonConcepts).join(', ')}`;
     });
 
     document.getElementById("solveRoom3").addEventListener("click", async () => {
         fetch("directions.json") 
-            .then((response) => response.json())
-            .then((directions) => {
-                navigateLabyrinth(directions).then((message) => {
+            .then(response => response.json())
+            .then(directions => { navigateLabyrinth(directions)
+                .then(message => {
                         document.getElementById("room3Result").textContent = message;
-                    });
+     });
                 });
-            });
-        }); 
+     });
+    
     
 function findMostRecentBook(books) {
     return books.reduce((mostRecent, book) =>
