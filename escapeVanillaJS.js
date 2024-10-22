@@ -7,54 +7,52 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((books) => {
           const mostRecentBook = findMostRecentBook(books);
           // 🪲 BugFixed: Corrected element ID
-          document.getElementById(
-            "room1Result"
-          ).textContent = `The key to the next room is: ${mostRecentBook.title}`;
+          document.getElementById("room1Result").textContent = `The key to the next room is: ${mostRecentBook.title}`;
         });
     });
   
     //Room 2
     document.getElementById("solveRoom2").addEventListener("click", () => {
-      const jsConcepts = new Set(["closure", "scope", "hoisting", "async"]);
+      const jsConcepts = new Set(["closure", "scope", "hoisting"]);
       // 🪲 BugFixed: Added async to jsConcepts?
       const reactConcepts = new Set(["components", "jsx", "hooks", "async"]);
       // 🪲 BugFixed: Corrected function call
       const commonConcepts = findIntersection(jsConcepts, reactConcepts);
-      document.getElementById(
-        "room2Result"
-      ).textContent = `The code to unlock the door is: ${Array.from(
-        commonConcepts
-      ).join(", ")}`;
+      document.getElementById("room2Result").textContent = `The code to unlock the door is: ${Array.from(commonConcepts).join(", ")}`;
     });
   
     //Room 3
     // 🪲 BugFixed: Changed to Async function call
     document.getElementById("solveRoom3").addEventListener("click", () => {
-      fetch("directions.json")
-        .then((response) => response.json())
-        .then((directions) => {
-          navigateLabyrinth(directions).then((message) => {
-            // 🪲 BugFixed: Corrected method
-            document.getElementById("room3Result").textContent = message;
-          });
-        });
+      fetch('directions.json')
+      .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error fetching directions: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(directions => {
+        return navigateLabyrinth(directions);
+    })
+    .then(message => {
+        document.getElementById("room3Result").textContent = message;
+    })
+    .catch(error => {
+        console.error("Error navigating labyrinth:", error);
+        document.getElementById("room3Result").textContent = "Oops! Something went wrong. Please try again.";
     });
   });
-  
+});
   // Finds the most recent book from books.json
   function findMostRecentBook(books) {
     // 🪲 BugFixed: Logic error corrected
-    return books.reduce((mostRecent, book) =>
-      new Date(book.published) > new Date(mostRecent.published)
-        ? book
-        : mostRecent
-    );
+    return books.reduce((mostRecent, book) =>new Date(mostRecent.published) < new Date(mostRecent.published) ? book : mostRecent);
   }
   
   // Finds the common concepts from jsConcepts && reactConcepts
   function findIntersection(setA, setB) {
     // 🪲 BugFixed: Added filter method to compair dates
-    const intersection = new Set([...setA].filter((value) => setB.has(value)));
+    const intersection = new Set([...setA].filter(value => value.startsWith("a")));
     return intersection;
   }
   
@@ -62,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function navigateLabyrinth(directions) {
     for (let direction of directions) {
       // 🪲 BugFixed: Added await
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       console.log(`Navigating: ${direction.step}`);
     }
     return "Congratulations! You've mastered the essentials of Vanilla JavaScript. Welcome to the world of React, where you'll build powerful and dynamic web applications. Let's dive in!";
