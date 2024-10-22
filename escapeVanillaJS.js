@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Room 1
     // 🪲 BugFixed: Corrected ID used for attaching the event listener
     document.getElementById("solveRoom1").addEventListener("click", () => {
-      fetch("books.json")
+      fetch('books.json')
         .then((response) => response.json())
         .then((books) => {
           const mostRecentBook = findMostRecentBook(books);
