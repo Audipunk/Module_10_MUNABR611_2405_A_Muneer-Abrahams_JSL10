@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
  document.getElementById("solveRoom1").addEventListener("click", () => {
         fetch('books.json') 
             .then(response => response.json())
@@ -7,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("resultRoom1").textContent = `The key to the next room is: ${mostRecentBook.title}`;
             });
         });
-    });
 
     document.getElementById("solveRoom2").addEventListener("click", () => {
         const jsConcepts = new Set(["closure", "scope", "hoisting"]);
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
      });
                 });
      });
-    
+});
     
 function findMostRecentBook(books) {
-    return books.reduce((mostRecent, book) => new Date(book.published) < new Date(mostRecent.published)? book : mostRecent
-    )
+   const reduce = (mostRecent, book) => new Date(book.published) < new Date(mostRecent.published)? book : mostRecent
+   return books
 }
 function findIntersection(setA, setB) { 
     const intersection = new Set([...setA].filter((item) => setB.has(item)));
