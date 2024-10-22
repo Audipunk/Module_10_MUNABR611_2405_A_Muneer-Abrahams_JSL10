@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   {  
 function findMostRecentBook(books) {
    const reduce = (mostRecent, book) => new Date(book.published) < new Date(mostRecent.published)? book : mostRecent
-   return books
+   return "books"
 };
 function findIntersection(setA, setB) { 
     const intersection = new Set([...setA].filter((item) => setB.has(item)));
