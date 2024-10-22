@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🪲 BugFixed: Corrected ID used for attaching the event listener
     document.getElementById("solveRoom1").addEventListener("click", () => {
       fetch('books.json')
-        .then((response) => response.json())
-        .then((books) => {
+        .then(response => response.json())
+        .then(books => {
           const mostRecentBook = findMostRecentBook(books);
           // 🪲 BugFixed: Corrected element ID
           document.getElementById("room1Result").textContent = `The key to the next room is: ${Array.from(mostRecentBook.title).join(",")}`;
@@ -25,28 +25,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🪲 BugFixed: Changed to Async function call
     document.getElementById("solveRoom3").addEventListener("click", () => {
       fetch('directions.json')
-      .then(response => {
-        if (!response.ok) {
-            throw new Error(`Error fetching directions: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(directions => {
-        return navigateLabyrinth(directions);
-    })
-    .then(message => {
-        document.getElementById("room3Result").textContent = message;
-    })
-    .catch(error => {
-        console.error("Error navigating labyrinth:", error);
-        document.getElementById("room3Result").textContent = "Oops! Something went wrong. Please try again.";
-    });
-  });
-});
+      .then(response => response.json())
+            .then(directions => {
+                navigateLabyrinth(directions)//It calls the navigateLabyrinth function, which logs each step with a delay and
+                    .then(message => {
+                        // 🪲 Bug corrected: Incorrect method//eventually returns a message that gets displayed in room3Result.
+                        document.getElementById("room3Result").textContent = message; //replaced get with '.textContent'
+                    });
+              });
+          });
+     });
+
   // Finds the most recent book from books.json
   function findMostRecentBook(books) {
     // 🪲 BugFixed: Logic error corrected
-    return books.reduce((mostRecent, book) =>new Date(mostRecent.published) < new Date(mostRecent.published) ? book : mostRecent);
+    return books.reduce((mostRecent, book) => new Date(book.published) < new Date(mostRecent.published) ? book : mostRecent);
   }
   
   // Finds the common concepts from jsConcepts && reactConcepts
