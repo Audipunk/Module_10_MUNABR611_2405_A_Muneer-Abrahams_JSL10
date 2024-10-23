@@ -1,7 +1,14 @@
 {
-    "python.testing.pytestArgs": [
-        "."
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Node: Nodemon",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["start"],
+            "outputCapture": "std",
+        },
+    ]
 }
+Start your node app v
