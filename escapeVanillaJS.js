@@ -39,26 +39,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Finds the most recent book from books.json
-    (function() {
-        function findMostRecentBook(books) {
-            if (books.length === 0) return null; // Handle empty array case
-            return books.reduce((mostRecent, book) => {
-                return new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent;
-            });
+    function findMostRecentBook(books) {
+        return books.reduce((mostRecent, book) => {
+            return new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent;
+        });
+    }
+
+    // Finds the common concepts from jsConcepts and reactConcepts
+    function findIntersection(setA, setB) {
+        return new Set([...setA].filter(value => setB.has(value)));
+    }
+
+    // Console.logs the steps in directions.json on a delay
+    async function navigateLabyrinth(directions) {
+        for (let direction of directions) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            console.log(`Navigating: ${direction.step}`);
         }
-    
-        // Finds the common concepts from jsConcepts and reactConcepts
-        function findIntersection(setA, setB) {
-            return new Set([...setA].filter(value => setB.has(value)));
-        }
-    
-        // Console.logs the steps in directions.json on a delay
-        async function navigateLabyrinth(directions) {
-            for (let direction of directions) {
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                console.log(`Navigating: ${direction.step}`);
-            }
-            return "Congratulations! You've mastered the essentials of Vanilla JavaScript. Welcome to the world of React, where you'll build powerful and dynamic web applications. Let's dive in!";
-        }
-    })();
-     })
+        return "Congratulations! You've mastered the essentials of Vanilla JavaScript. Welcome to the world of React, where you'll build powerful and dynamic web applications. Let's dive in!";
+    }
+});
