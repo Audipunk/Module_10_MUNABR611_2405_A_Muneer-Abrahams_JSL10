@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("room1Result").textContent = "The key to the next room is: ${mostRecentBook.title}";
             })
             .catch(error => {
-                console.error('Error fetching books:', error);
+                console.error("Error fetching books:", error);
                 document.getElementById("room1Result").textContent = "Failed to load books.";
             });
     });
