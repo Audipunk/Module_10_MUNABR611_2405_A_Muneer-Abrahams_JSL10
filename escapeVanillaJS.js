@@ -25,17 +25,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Room 3
-    document.getElementById("solveRoom3").addEventListener("click", async () => {
+    document.getElementById("solveRoom3").addEventListener("click"), async () => {
         try {
             const response = await fetch('directions.json');
-            if (!response.ok) throw new Error('Network response was not ok');
+            then((response) => {
+              if (!response.ok) throw new Error('Network response was not ok! Status: ${response.status}')});
             const directions = await response.json();
             const message = await navigateLabyrinth(directions);
             document.getElementById("room3Result").textContent = message;
-        } catch (error) {
+        }
+     catch (error)  {
             console.error('Error fetching directions:', error);
             document.getElementById("room3Result").textContent = "Failed to load directions.";
-        }
+    }
+    }
     });
 
     // Finds the most recent book from books.json
