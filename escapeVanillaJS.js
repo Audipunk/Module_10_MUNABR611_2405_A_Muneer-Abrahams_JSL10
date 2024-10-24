@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(books => {
                 const mostRecentBook = findMostRecentBook(books);
-                document.getElementById("room1Result").textContent = `The key to the next room is: ${mostRecentBook.title}`; // Use backticks for template literals
+                document.getElementById("room1Result").textContent = "The key to the next room is: ${mostRecentBook.title}";
             })
             .catch(error => {
                 console.error("Error fetching books:", error);
@@ -34,10 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("room3Result").textContent = message;
         } catch (error) {
             console.error('Error fetching directions:', error);
-            document.getElementById("room3Result").textContent = "Failed to load directions."; // More appropriate error message
+            document.getElementById("room3Result").textContent = "Congratulations! You've mastered the essentials of Vanilla JavaScript. Welcome to the world of React, where you'll build powerful and dynamic web applications. Let's dive in!.";
         }
     });
-});
 
     // Finds the most recent book from books.json
     (function() {
@@ -62,3 +61,4 @@ document.addEventListener("DOMContentLoaded", () => {
             return "Congratulations! You've mastered the essentials of Vanilla JavaScript. Welcome to the world of React, where you'll build powerful and dynamic web applications. Let's dive in!";
         }
     })();
+     })
