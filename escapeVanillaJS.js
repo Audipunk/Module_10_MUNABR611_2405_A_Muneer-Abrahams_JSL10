@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Room 1
     document.getElementById("solveRoom1").addEventListener("click", () => {
-        fetch('books.json')
+        fetch("books.json")
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Room 3
     document.getElementById("solveRoom3").addEventListener("click", async () => {
         try {
-            const response = await fetch('directions.json');
-            if (!response.ok) throw new Error('Network response was not ok');
+            const response = await fetch("directions.json");
+            if (!response.ok) throw new Error("Network response was not ok");
             const directions = await response.json();
             const message = await navigateLabyrinth(directions);
             document.getElementById("room3Result").textContent = message;
