@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Room 1
     document.getElementById("solveRoom1").addEventListener("click", () => {
-        fetch("books.json")
+        fetch("http://localhost:8080/books.json")
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
