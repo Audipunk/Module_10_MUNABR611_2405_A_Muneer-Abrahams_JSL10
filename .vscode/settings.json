@@ -7,7 +7,7 @@
             "name": "Node: Nodemon",
             "runtimeExecutable": "npm",
             "runtimeArgs": ["start"],
-            "outputCapture": "std",
+            "outputCapture": "std"
         },
     ]
 }

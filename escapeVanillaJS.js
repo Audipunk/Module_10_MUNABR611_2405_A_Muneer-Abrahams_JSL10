@@ -4,10 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch("http://localhost:8080/books.json")
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
-                return response.json();
+                return response.json(books.json);
             })
             .then(books => {
-                const mostRecentBook = findMostRecentBook(books);
                 document.getElementById("room1Result").textContent = "The key to the next room is: ${mostRecentBook.title}";
             })
             .catch(error => {
