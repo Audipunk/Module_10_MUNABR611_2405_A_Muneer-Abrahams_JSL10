@@ -53,19 +53,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Finds the most recent book from books.json
     function findMostRecentBook(books) {
-        return books.reduce((mostRecent, book) => {
+        if (books === null) {
+            throw new Error("Books must not be null");
+        }
+        if (!Array.isArray(books)) {
+            throw new Error("Books must be an array");
+        }
+        if (books.length === 0) {
+            throw new Error("Books array must not be empty");
+        }
+        const mostRecent = books.reduce((mostRecent, book) => {
+            if (book === null) {
+                throw new Error("Book must not be null");
+            }
+            if (typeof book.published !== "string") {
+                throw new Error("Book's published date must be a string");
+            }
             return new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent;
         });
+        if (mostRecent === null) {
+            throw new Error("Most recent book must not be null");
+        }
+        return mostRecent;
     }
 
     // Finds the common concepts from jsConcepts and reactConcepts
     function findIntersection(setA, setB) {
+        if (setA === null || setB === null) {
+            throw new Error("Set A and Set B must not be null");
+        }
+        if (!(setA instanceof Set) || !(setB instanceof Set)) {
+            throw new Error("Set A and Set B must be instances of Set");
+        }
         return new Set([...setA].filter(value => setB.has(value)));
     }
 
     // Console.logs the steps in directions.json on a delay
     async function navigateLabyrinth(directions) {
+        if (!directions || !Array.isArray(directions)) {
+            throw new Error("Directions must be a non-null array of objects.");
+        }
         for (let direction of directions) {
+            if (!direction || typeof direction.step !== "string") {
+                throw new Error("Each step in the labyrinth must be a non-null object with a 'step' property of type string.");
+            }
             await new Promise(resolve => setTimeout(resolve, 1000));
             console.log(`Navigating: ${direction.step}`);
         }
