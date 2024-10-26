@@ -1,7 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Room 1
     document.getElementById("solveRoom1").addEventListener("click", () => {
-        fetch("http://localhost:8080/books.json")
+        fetch("http://localhost:8080/books.json", {
+            headers: {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+                "sec-ch-ua": `"Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"`,
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": `"Windows"`
+              }
+            })
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json("http://localhost:8080/books.json");
@@ -29,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch("http://localhost:8080/directions.json");
             if (!response.ok) throw new Error("Network response was not ok");
             const directions = await response.json();
+            console.log("Directions:", directions);
+
             const message = await navigateLabyrinth(directions);
             document.getElementById("room3Result").textContent = message;
         } catch (error) {
