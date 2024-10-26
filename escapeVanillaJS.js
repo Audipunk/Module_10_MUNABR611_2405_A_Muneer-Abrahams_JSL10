@@ -18,7 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(error => {
                 console.error("Error fetching books:", error);
-                document.getElementById("room1Result").textContent = "Failed to load books.";
+                const room1Result = document.getElementById("room1Result").textContent = "Failed to load books.";
+                if (room1Result) {
+                    room1Result.textContent = "Failed to load books.";
+                } else {
+                    console.warn("Element with ID 'room1Result' not found in the DOM.");
+                }
             });
     });
 
