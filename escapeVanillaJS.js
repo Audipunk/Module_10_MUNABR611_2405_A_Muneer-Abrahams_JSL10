@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error fetching books:", error);
                 const room1Result = document.getElementById("room1Result").textContent = "Failed to load books.";
                 if (room1Result) {
-                    room1Result.textContent = "Failed to load books.";
+                    ("room1Result").textContent = "Failed to load books.";
                 } else {
                     console.warn("Element with ID 'room1Result' not found in the DOM.");
                 }
