@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Room 1
-    document.getElementById("room1Results").addEventListener("click", () => {
+    document.getElementById("solveRoom1").addEventListener("click", () => {
         fetch("http://localhost:8080/books.json", {
             headers: {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
