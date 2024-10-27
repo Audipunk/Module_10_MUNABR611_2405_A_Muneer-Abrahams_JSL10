@@ -26,7 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
     });
+  
     // Room 2
+    function findIntersection(setA, setB) {
+        // 🪲 Bug: Incorrect logic FIXED
+        const intersection = new Set([...setA].filter(item => setB.has(item)));
+        return intersection;
+    }
+
     document.getElementById("solveRoom2").addEventListener("click", () => {
         const jsConcepts = new Set(["closure", "scope", "hoisting"]);
         const reactConcepts = new Set(["components", "jsx", "hooks", "async"]);
@@ -36,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Room 3
     document.getElementById("solveRoom3").addEventListener("click", async () => {
         try {
-            const response = await fetch("http://localhost:8080/directions.json");
+            const response = await fetch('http://localhost:8080/directions.json');
             if (!response.ok) throw new Error("Network response was not ok");
             const directions = await response.json();
             console.log("Directions:", directions);
@@ -52,11 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function findMostRecentBook(books) {
         // 🪲 Bug: Logic error FIXED
         return books.reduce((mostRecent, book) => new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent);
-    }
-    function findIntersection(setA, setB) {
-        // 🪲 Bug: Incorrect logic FIXED
-        const intersection = new Set([...setA].filter(item => setB.has(item)));
-        return intersection;
     }
         async function navigateLabyrinth(directions) {
         for (let direction of directions) {
