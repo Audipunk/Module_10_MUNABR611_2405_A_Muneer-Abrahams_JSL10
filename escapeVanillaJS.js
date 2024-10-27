@@ -1,32 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Room 1
-    document.getElementById("solveRoom1").addEventListener("click", () => {
-        fetch("http://localhost:8080/books.json", {
-            headers: {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-                "sec-ch-ua": `"Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"`,
-                "sec-ch-ua-mobile": "?0",
-                "sec-ch-ua-platform": `"Windows"`
-              }
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
-                return response.json("http://localhost:8080/books.json");
-            })
+    // 🪲 Bug: Incorrect ID used for attaching the event listener
+    document.getElementById("solveRoom1").addEventListener("click", () => { 
+        fetch('books.json') 
+            .then(response => response.json())
             .then(books => {
-                document.getElementById("room1Result").textContent = "The key to the next room is: ${mostRecentBook.title}";
-            })
-            .catch(error => {
-                console.error("Error fetching books:", error);
-                const room1Result = document.getElementById("room1Result").textContent = "Failed to load books.";
-                if (room1Result) {
-                    room1Result.textContent = "Failed to load books.";
-                } else {
-                    console.warn("Element with ID 'room1Result' not found in the DOM.");
-                }
+                const mostRecentBook = findMostRecentBook(books);
+                // 🪲 Bug: Incorrect element ID
+                document.getElementById("room1Result").textContent = `The key to the next room is: ${mostRecentBook.title}`;
             });
     });
 
+    function findMostRecentBook(books) {
+        return books.reduce((mostRecent, book) => new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent);
+    }
+   
     // Room 2
     document.getElementById("solveRoom2").addEventListener("click", () => {
         const jsConcepts = new Set(["closure", "scope", "hoisting"]);
