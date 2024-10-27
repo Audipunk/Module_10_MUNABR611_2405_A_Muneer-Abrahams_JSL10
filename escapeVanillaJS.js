@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
     });
-
     // Room 2
     document.getElementById("solveRoom2").addEventListener("click", () => {
         const jsConcepts = new Set(["closure", "scope", "hoisting"]);
@@ -34,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const commonConcepts = findIntersection(jsConcepts, reactConcepts);
         document.getElementById("room2Result").textContent = `The code to unlock the door is: ${Array.from(commonConcepts).join(", ")}`;
     });
-
     // Room 3
     document.getElementById("solveRoom3").addEventListener("click", async () => {
         try {
@@ -51,20 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-    // Finds the most recent book from books.json
     function findMostRecentBook(books) {
         // 🪲 Bug: Logic error FIXED
         return books.reduce((mostRecent, book) => new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent);
     }
-    
     function findIntersection(setA, setB) {
         // 🪲 Bug: Incorrect logic FIXED
         const intersection = new Set([...setA].filter(item => setB.has(item)));
         return intersection;
     }
-    
-    async function navigateLabyrinth(directions) {
+        async function navigateLabyrinth(directions) {
         for (let direction of directions) {
             // 🪲 Bug: No delay FIXED
             await new Promise(resolve => setTimeout(resolve, 1000));
